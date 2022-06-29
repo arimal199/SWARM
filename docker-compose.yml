@@ -5,16 +5,14 @@ services:
     container_name: swarm1
     image: docker1
     restart: always
-    networks:
-      - swarm
+    network_mode: host
     volumes:
       - ./root:/root:rw,z
   swarm2:
     container_name: swarm2
     image: docker1
     restart: always
-    networks:
-      - swarm
+    network_mode: host
     volumes:
       - ./root:/root:rw,z
 
@@ -22,12 +20,6 @@ services:
     container_name: swarm3
     image: docker1
     restart: always
-    networks:
-      - swarm
+    network_mode: host
     volumes:
       - ./root:/root:rw,z
-
-networks:
-  swarm:
-    name: host
-    external: true
