@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  swarm1:
+    container_name: swarm1
+    image: docker1
+    restart: always
+    networks:
+      swarm:
+        ipv4_address: 10.0.0.2
+    volumes:
+      - ./root:/root:rw,z
+  swarm2:
+    container_name: swarm2
+    image: docker1
+    restart: always
+    networks:
+      swarm:
+        ipv4_address: 10.0.0.3
+    volumes:
+      - ./root:/root:rw,z
+
+  swarm3:
+    container_name: swarm3
+    image: docker1
+    restart: always
+    networks:
+      swarm:
+        ipv4_address: 10.0.0.4
+    volumes:
+      - ./root:/root:rw,z
+
+networks:
+  swarm:
+    name: swarm
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "10.0.0.0/24"
+          ip_range: "10.0.0.10/24"
+          gateway: "10.0.0.1"
