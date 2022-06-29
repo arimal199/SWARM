@@ -29,5 +29,5 @@ services:
 
 networks:
   swarm:
-    name: swarm
-    driver: host
+    name: host
+    external: true
