@@ -6,8 +6,7 @@ services:
     image: docker1
     restart: always
     networks:
-      swarm:
-        ipv4_address: 10.0.0.2
+      - swarm
     volumes:
       - ./root:/root:rw,z
   swarm2:
@@ -15,8 +14,7 @@ services:
     image: docker1
     restart: always
     networks:
-      swarm:
-        ipv4_address: 10.0.0.3
+      - swarm
     volumes:
       - ./root:/root:rw,z
 
@@ -25,19 +23,11 @@ services:
     image: docker1
     restart: always
     networks:
-      swarm:
-        ipv4_address: 10.0.0.4
+      - swarm
     volumes:
       - ./root:/root:rw,z
 
 networks:
   swarm:
     name: swarm
-    driver: macvlan
-    driver_opts:
-      parent: eth0
-    ipam:
-      config:
-        - subnet: "10.0.0.0/24"
-          ip_range: "10.0.0.10/24"
-          gateway: "10.0.0.1"
+    driver: host
